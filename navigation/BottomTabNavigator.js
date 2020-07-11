@@ -1,9 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { NavigationContainer, DrawerActions } from '@react-navigation/native';
 import * as React from 'react';
-
+import { View, Text, Button, Image } from 'react-native';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import Login from '../screens/Login';
+import Search from '../screens/Search';
+import Watch from '../screens/Watch';
+import Manager from '../screens/Manager';
+import Profile from '../screens/Profile';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -12,7 +17,15 @@ export default function BottomTabNavigator({ navigation, route }) {
   // Set the header title on the parent stack navigator depending on the
   // currently active tab. Learn more in the documentation:
   // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  navigation.setOptions({ 
+    headerTitle: getHeaderTitle(route),
+    headerRight: () => (
+      <Button
+        title="Toggle drawer"
+        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+      />
+    ),
+  });
 
   return (
     <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
@@ -25,11 +38,43 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
+        name="Profile"
+        component={Profile}
         options={{
-          title: 'Resources',
+          title: 'Profile',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-book" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Login"
+        component={Login}
+        options={{
+          title: 'Login',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-log-in" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Search"
+        component={Search}
+        options={{
+          title: 'Search',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Watch"
+        component={Watch}
+        options={{
+          title: 'Watch',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Manager"
+        component={Manager}
+        options={{
+          title: 'Manager',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
         }}
       />
     </BottomTab.Navigator>
@@ -42,7 +87,15 @@ function getHeaderTitle(route) {
   switch (routeName) {
     case 'Home':
       return 'How to get started';
-    case 'Links':
-      return 'Links to learn more';
+    case 'Profile':
+      return 'Profile';
+    case 'Login':
+      return 'User Login';
+    case 'Search':
+      return 'Search';
+    case 'Watch':
+      return 'Watch';
+    case 'Manager':
+      return 'Manager';
   }
 }

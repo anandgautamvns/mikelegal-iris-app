@@ -7,7 +7,11 @@ export default {
       path: 'root',
       screens: {
         Home: 'home',
-        Links: 'links',
+        Profile: 'profile',
+        Login: 'login',
+        Search: 'search',
+        Watch: 'watch',
+        Manager: 'manager',
       },
     },
   },
