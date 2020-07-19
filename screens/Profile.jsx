@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Platform, Image, Button } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { DrawerActions } from '@react-navigation/native';
 import Loader from '../components/Loader';
 
 import { getSubscriptionProfile } from '../redux/actions/signIn';
@@ -53,12 +54,9 @@ class Profile extends Component {
                             <Text style={styles.contentText}>{subscriptionQuota.used}</Text>
                         </View>
                         <Button
-                                title="Modal"
-                                color="#4d3d89"
-                                onPress={()=> this.setState({
-                                    modalVisible: true
-                                })}
-                            />
+                            title="Mikelegal"
+                            onPress={() => this.props.navigation.dispatch(DrawerActions.toggleDrawer())}
+                        />
                     </View>
                 }
                 {subscriptionStatus === ERROR && 

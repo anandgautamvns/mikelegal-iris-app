@@ -6,7 +6,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 import { signIn } from '../redux/actions/signIn';
 import { LOADING, SUCCESS, ERROR } from '../constants/GeneralConstants';
+import { AuthContext } from './Context'
 
+// const { signIn } = React.useContext(AuthContext);
 class Login extends Component {
     constructor(props){
         super(props);
