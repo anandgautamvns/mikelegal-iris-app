@@ -10,14 +10,11 @@ import { Dimensions } from 'react-native';
 import BottomTabNavigator from './BottomTabNavigator';
 
 import Profile from '../screens/Profile';
+import WhatsNew from '../screens/WhatsNew';
 
 import { AuthContext } from '../screens/Context';
 
 const Drawer = createDrawerNavigator();
-
-const INITIAL_ROUTE_NAME = 'Profile';
-
-
 function CustomDrawerContent(props) {
     const { signOut } = React.useContext(AuthContext)
     return (
@@ -44,7 +41,6 @@ export default function DrawerNavigator() {
     const isLargeScreen = dimensions.width >= 768;
     return (
         <Drawer.Navigator
-            initialRouteName={INITIAL_ROUTE_NAME}
             openByDefault
             drawerType={isLargeScreen ? 'slide' : 'front'}
             drawerStyle={
@@ -61,8 +57,9 @@ export default function DrawerNavigator() {
                 // itemStyle: { marginVertical: 30 },
             }}
         >
-            <Drawer.Screen name="Search" component={BottomTabNavigator}/>
-            <Drawer.Screen name="Profile" component={Profile}/>
+            <Drawer.Screen name="home" component={BottomTabNavigator}/>
+            <Drawer.Screen name="profile" component={Profile}/>
+            <Drawer.Screen name="whats-new" component={WhatsNew}/>
         </Drawer.Navigator>
     );
 }

@@ -5,26 +5,51 @@ import { DrawerActions } from '@react-navigation/native';
 import TabBarIcon from '../components/TabBarIcon';
 import Search from '../screens/Search';
 import Manager from '../screens/Manager';
+import Hearing from '../screens/Hearing';
 import Profile from '../screens/Profile';
-
+import SearchScreen from '../screens/SearchScreen';
 const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = 'Search';
+const INITIAL_ROUTE_NAME = 'Manager';
 
 export default function BottomTabNavigator({ navigation, route }) {
   navigation.setOptions({ 
     headerTitle: getHeaderTitle(route),
-    // headerRight: () => (
-    //   <Button
-    //     title="Mikelegal"
-    //     onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
-    //   />
-    // ),
+    headerRight: () => (
+      <Button
+        title="Mikelegal"
+        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}
+      />
+    ),
   });
+  console.log('navigation', navigation);
+  console.log('setOptions', navigation.setOptions());
+  console.log('route', route);
 
   return (
-    <BottomTab.Navigator>
+    <BottomTab.Navigator 
+      // screenOptions={({ route }) => ({
+      //   tabBarIcon: ({ focused, color, size }) => {
+      //     let iconName;
+
+      //     if (route.name === 'Home') {
+      //       iconName = focused
+      //         ? 'ios-information-circle'
+      //         : 'ios-information-circle-outline';
+      //     } else if (route.name === 'Settings') {
+      //       iconName = focused ? 'ios-list-box' : 'ios-list';
+      //     }
+
+      //     // You can return any component that you like here!
+      //     return <Ionicons name={iconName} size={size} color={color} />;
+      //   },
+      // })}
+      tabBarOptions={{
+        activeTintColor: 'tomato',
+        inactiveTintColor: 'gray',
+      }}
+    >
       <BottomTab.Screen
-        name="Profile"
+        name="profile"
         component={Profile}
         options={{
           title: 'Profile',
@@ -32,19 +57,19 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="Search"
-        component={Search}
+        name="search"
+        component={SearchScreen}
         options={{
           title: 'Search',
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
         }}
       />
       <BottomTab.Screen
-        name="Manager"
-        component={Manager}
+        name="hearing"
+        component={Hearing}
         options={{
-          title: 'Manager',
-          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-manager" />,
+          title: 'Hearing',
+          tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-search" />,
         }}
       />
     </BottomTab.Navigator>
@@ -52,7 +77,9 @@ export default function BottomTabNavigator({ navigation, route }) {
 }
 
 function getHeaderTitle(route) {
+  console.log('route', route);
   const routeName = route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
+  console.log('routeName', routeName);
   switch (routeName) {
     case 'Profile':
       return 'Profile';
@@ -60,5 +87,7 @@ function getHeaderTitle(route) {
       return 'Search';
     case 'Manager':
       return 'Manager';
+    case 'Hearing':
+      return 'Hearing';
   }
 }

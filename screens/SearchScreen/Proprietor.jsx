@@ -1,14 +1,13 @@
-import { Ionicons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Platform, TextInput, FlatList } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import Loader from '../components/Loader';
+import { StyleSheet, Text, View, Platform, FlatList } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import Loader from '../../components/Loader';
 
-import { signIn, queueReport, getUnavailableReports } from '../redux/actions/signIn';
-import { TM_SEARCH, TM_WATCH, TM_MANAGER, FILE, SEARCH, PROPRIETOR, LOADING, SUCCESS, ERROR } from '../constants/GeneralConstants';
+import { signIn, queueReport, getUnavailableReports } from '../../redux/actions/signIn';
+import { TM_SEARCH, FILE, SEARCH, PROPRIETOR, LOADING, SUCCESS, ERROR } from '../../constants/GeneralConstants';
 
-class Search extends Component {
+class Proprietor extends Component {
     constructor(props){
         super(props);
         this.state = {}
@@ -27,11 +26,6 @@ class Search extends Component {
                 [userVariable]: value
             }
         })
-    }
-
-    async onHandleSubmit() {
-        const { username, password } = this.state.user;
-        this.props.signIn(this.state.user)
     }
 
     render() {
@@ -166,4 +160,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(Proprietor);

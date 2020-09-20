@@ -6,12 +6,13 @@ export default {
     Root: {
       path: 'mikelegal',
       screens: {
-        Home: 'home',
+        // Home: 'home',
         Profile: 'profile',
         Login: 'login',
         Search: 'search',
         Watch: 'watch',
         Manager: 'manager',
+        Hearing: 'hearing',
       },
     },
   },

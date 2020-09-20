@@ -1,14 +1,14 @@
-import { Ionicons, AntDesign } from '@expo/vector-icons';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Platform, TextInput, FlatList } from 'react-native';
-import { RectButton, ScrollView } from 'react-native-gesture-handler';
-import Loader from '../components/Loader';
+import { ScrollView } from 'react-native-gesture-handler';
+import Loader from '../../components/Loader';
 
-import { signIn, queueReport, getUnavailableReports } from '../redux/actions/signIn';
-import { TM_SEARCH, TM_WATCH, TM_MANAGER, FILE, SEARCH, PROPRIETOR, LOADING, SUCCESS, ERROR } from '../constants/GeneralConstants';
+import { signIn, queueReport, getUnavailableReports } from '../../redux/actions/signIn';
+import { TM_SEARCH, FILE, SEARCH, PROPRIETOR, LOADING, SUCCESS, ERROR } from '../../constants/GeneralConstants';
+import { standardizeDate } from '../../function';
 
-class Search extends Component {
+class File extends Component {
     constructor(props){
         super(props);
         this.state = {}
@@ -27,11 +27,6 @@ class Search extends Component {
                 [userVariable]: value
             }
         })
-    }
-
-    async onHandleSubmit() {
-        const { username, password } = this.state.user;
-        this.props.signIn(this.state.user)
     }
 
     render() {
@@ -53,23 +48,31 @@ class Search extends Component {
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Email:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.report_owner}</Text>
+                                    <Text style={styles.contentText}>{ eachReport.mark_report ? eachReport.mark_report.email : eachReport.proprietor_report ? eachReport.proprietor_report.email : "-" }</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Created:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.created}</Text>
+                                    <Text style={styles.contentText}>{standardizeDate(eachReport.created)}</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Modified:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.modified}</Text>
+                                    <Text style={styles.contentText}>{standardizeDate(eachReport.modified)}</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Report's Title:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.created}</Text>
+                                    <Text style={styles.contentText}>{eachReport.mark_report?"Mark":"-"}</Text>
+                                </View>
+                                <View style={styles.cardBodyContainer}>
+                                    <Text style={styles.contentHeading}>Report's Title:- </Text>
+                                    <Text style={styles.contentText}>{eachReport.proprietor_report?"Proprietor":"-"}</Text>
+                                </View>
+                                <View style={styles.cardBodyContainer}>
+                                    <Text style={styles.contentHeading}>Report's Title:- </Text>
+                                    <Text style={styles.contentText}>{eachReport.mark_report?eachReport.mark_report.title:eachReport.proprietor_report?eachReport.proprietor_report.title:"-"}</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Type:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.type}</Text>
+                                    <Text style={styles.contentText}>{eachReport.mark_report?eachReport.mark_report.type:eachReport.proprietor_report?eachReport.proprietor_report.type:"-"}</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Selected Marks:- </Text>
@@ -77,7 +80,7 @@ class Search extends Component {
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>File Type:- </Text>
-                                    <Text style={styles.contentText}>{eachReport.report_owner}</Text>
+                                    <Text style={styles.contentText}>{eachReport.type}</Text>
                                 </View>
                                 <View style={styles.cardBodyContainer}>
                                     <Text style={styles.contentHeading}>Report:- </Text>
@@ -87,7 +90,6 @@ class Search extends Component {
                                     <Text style={styles.contentHeading}>ReQueue:- </Text>
                                     <Text style={styles.contentText}>{eachReport.report_owner}</Text>
                                 </View>
-                                
                             </View>
                         )}
                     </View>
@@ -166,4 +168,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Search);
+export default connect(mapStateToProps, mapDispatchToProps)(File);

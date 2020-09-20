@@ -2,6 +2,8 @@
   "expo": {
     "name": "mikelegal-iris-app",
     "slug": "mikelegal-iris-app",
+    "privacy": "public",
+    "sdkVersion": "37.0.0",
     "platforms": [
       "ios",
       "android",
@@ -9,7 +11,7 @@
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/mike-icon.png",
     "scheme": "myapp",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -24,6 +26,10 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.anandgautamvns.mikelegal_iris",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

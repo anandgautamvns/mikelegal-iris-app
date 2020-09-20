@@ -9,7 +9,6 @@ import { createMaterialTopTabNavigator } from '@react-navigation/material-top-ta
 
 import Profile from './Profile';
 import Search from './Search';
-import SideBarDrawer from './../navigation/DrawerNavigator';
 
 const Tab = createMaterialTopTabNavigator();
 
